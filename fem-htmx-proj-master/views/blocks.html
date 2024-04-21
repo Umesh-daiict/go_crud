@@ -6,7 +6,7 @@
     </head>
     <body>
         <div style="display: flex; flex-direction: column">
-            {{ template "blocks" . }}
+            {{ template "blocks" . }} 
         </div>
     </body>
 </html>
@@ -15,7 +15,7 @@
 {{ block "blocks" . }}
     {{ range .Blocks }}
         <div style="background-color: #eee; margin: 2px">
-            <span>{{ .Id }}</span>
+            <span>{{ .Id }} </span>
         </div>
     {{ end }}
 
