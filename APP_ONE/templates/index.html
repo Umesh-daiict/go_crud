@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umesh's 1st Go APP</title>
+    <link rel="stylesheet" src="../static/index.css" />
+    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <main>
+        <header>
+            <ul id="stock-list">
+
+            </ul>
+        </header>
+        <section>
+            <input placeholder="search.." hx-trigger="keyup changed delayed:500ms" hx-get="/search" hx-target="#search-result" type="search"  name="key"/>
+            <div id="search-result"></div>
+        </section>
+    </main>
+</body>
+</html>
