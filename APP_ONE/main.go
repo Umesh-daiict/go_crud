@@ -15,8 +15,19 @@ func main() {
 	})
 
 	http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
-		temp := template.Must(template.ParseFiles("./templates/fregments"))
-		temp.Execute(w, nil)
+		temp := template.Must(template.ParseFiles("./templates/fregments/results.html"))
+		data := map[string][]Stock{"Results": SearchStocksResult(r.URL.Query().Get("key"))}
+		temp.Execute(w, data)
+	})
+
+	http.HandleFunc("/stock/", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case "POST":
+			ticker := r.PostFormValue("ticker")
+			stk := SearchStocksResult(ticker)[0]
+			val := getDailyValue(ticker)
+			temp := template.Must(template.ParseFiles("./templates/index.html"))
+		}
 	})
 
 	log.Println("App runing on port 8000...")
