@@ -76,12 +76,12 @@ section input {
     margin-top: var(--margin);
 }
 
-#search-results ul li {
+#search-result ul li {
     color: #FFF;
     display: flex;
 }
 
-#search-results ul li button {
+#search-result ul li button {
     align-self: center;
     height: 34px;
     padding: 0 15px;

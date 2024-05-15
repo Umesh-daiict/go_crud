@@ -27,6 +27,7 @@ func main() {
 			stk := SearchStocksResult(ticker)[0]
 			val := getDailyValue(ticker)
 			temp := template.Must(template.ParseFiles("./templates/index.html"))
+			temp.ExecuteTemplate(w, "stock-element", Stock{Ticker: stk.Ticker, Name: stk.Name, Price: val.Open})
 		}
 	})
 

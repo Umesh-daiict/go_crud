@@ -34,3 +34,14 @@ func SearchStocksResult(ticker string) []Stock {
 	json.Unmarshal(body, &data)
 	return data.Results
 }
+
+func getDailyValue(ticker string) Values {
+	resp, err := http.Get(PolygonPath + "/v1/open-close/" + strings.ToUpper(ticker) + "/2024-05-15/?" + ApiKey)
+	if err != nil {
+		log.Fatal(err)
+	}
+	body, err := io.ReadAll(resp.Body)
+	data := Values{}
+	json.Unmarshal(body, &data)
+	return data
+}
