@@ -8,8 +8,10 @@ import (
 	"strings"
 )
 
-const PolygonPath = "https://api.polygon.io"
-const ApiKey = "apiKey=KpXGkgim6HyuF5IWvp0d2dy7s8EpUWuu"
+const (
+	PolygonPath = "https://api.polygon.io"
+	ApiKey      = "DvauHA_HR3_kxPO7FqYkPMusRTBw0tdA"
+)
 
 type Stock struct {
 	Ticker string `json:"ticker"`
@@ -21,8 +23,10 @@ type Values struct {
 	Open float64 `json:"open"`
 }
 
+// https://api.polygon.io/v3/reference/tickers?active=true&limit=100&apiKey=DvauHA_HR3_kxPO7FqYkPMusRTBw0tdA
 func SearchStocksResult(ticker string) []Stock {
-	resp, err := http.Get(PolygonPath + "/v3/reference/tickers?" + ApiKey + "&ticker=" + strings.ToUpper(ticker))
+	log.Printf(PolygonPath + "/v3/reference/tickers?active=true&limit=100&apiKey=" + ApiKey + "&ticker=" + strings.ToUpper(ticker))
+	resp, err := http.Get(PolygonPath + "/v3/reference/tickers?active=true&limit=100&apiKey=" + ApiKey + "&ticker=" + strings.ToUpper(ticker))
 	if err != nil {
 		log.Fatal(err)
 	}

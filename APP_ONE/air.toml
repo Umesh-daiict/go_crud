@@ -1,0 +1,17 @@
+# air.toml
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  bin = "bin/myapp"          # Output binary path
+  cmd = "go build -o bin/myapp main.go"  # Command to build your application
+  include_ext = ["go"]       # Extensions to watch
+  exclude_dir = ["static", "templates", "tmp"]  # Directories to exclude from watching
+  exclude_file = ["air.toml"]  # Files to exclude from watching
+  follow_symlink = true
+
+[dev]
+  cmd = "bin/myapp"          # Command to run the built binary
+  delay = 1000               # Delay in ms
+  restart = true             # Restart the binary after rebuild
+  terminate_timeout = 5000   # Timeout in ms to terminate the binary

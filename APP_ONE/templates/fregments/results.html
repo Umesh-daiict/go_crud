@@ -1,10 +1,12 @@
-<ul>
-    {{range .Results}}
-    <li>
-        <h3>{{.Name}}</h3>
-        <button 
-        name="ticker"
-        value="{{.Ticker}}""
+<div>
+{{ if gt (len .Results) 0}}
+    <ul>
+        {{range .Results}}
+        <li>
+            <h3>{{.Name}}</h3>
+            <button 
+            name="ticker"
+            value="{{.Ticker}}"
         hx-post="/stock/"
         hx-indicator="#spinner"
         hx-targer="#stock-list"
@@ -15,3 +17,7 @@
     </li>
     {{end}}
 </ul>
+{{else}}
+<p>No Results Founds</p>
+{{end}}
+</div>
