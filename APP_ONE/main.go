@@ -24,6 +24,7 @@ func main() {
 		switch r.Method {
 		case "POST":
 			ticker := r.PostFormValue("ticker")
+			println("ticker", ticker)
 			stk := SearchStocksResult(ticker)[0]
 			val := getDailyValue(ticker)
 			temp := template.Must(template.ParseFiles("./templates/index.html"))

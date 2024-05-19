@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"time"
 )
 
 const (
@@ -25,7 +26,6 @@ type Values struct {
 
 // https://api.polygon.io/v3/reference/tickers?active=true&limit=100&apiKey=DvauHA_HR3_kxPO7FqYkPMusRTBw0tdA
 func SearchStocksResult(ticker string) []Stock {
-	log.Printf(PolygonPath + "/v3/reference/tickers?active=true&limit=100&apiKey=" + ApiKey + "&ticker=" + strings.ToUpper(ticker))
 	resp, err := http.Get(PolygonPath + "/v3/reference/tickers?active=true&limit=100&apiKey=" + ApiKey + "&ticker=" + strings.ToUpper(ticker))
 	if err != nil {
 		log.Fatal(err)
@@ -40,7 +40,10 @@ func SearchStocksResult(ticker string) []Stock {
 }
 
 func getDailyValue(ticker string) Values {
-	resp, err := http.Get(PolygonPath + "/v1/open-close/" + strings.ToUpper(ticker) + "/2024-05-15/?" + ApiKey)
+	now_data := time.Now()
+	currentFormatedDate := now_data.Format("2024-05-15")
+	log.Printf(currentFormatedDate)
+	resp, err := http.Get(PolygonPath + "/v1/open-close/" + strings.ToUpper(ticker) + "/" + currentFormatedDate + "?adjusted=true&apiKey=" + ApiKey)
 	if err != nil {
 		log.Fatal(err)
 	}

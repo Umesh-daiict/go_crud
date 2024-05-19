@@ -1,23 +1,23 @@
 <div>
-{{ if gt (len .Results) 0}}
-    <ul>
-        {{range .Results}}
-        <li>
-            <h3>{{.Name}}</h3>
-            <button 
-            name="ticker"
-            value="{{.Ticker}}"
+  {{ if gt (len .Results) 0}}
+  <ul>
+    {{range .Results}}
+    <li>
+      <h3>{{.Name}}</h3>
+      <button
+        name="ticker"
+        value="{{.Ticker}}"
         hx-post="/stock/"
         hx-indicator="#spinner"
-        hx-targer="#stock-list"
+        hx-target="#stock-list"
         hx-swap="beforeend"
-        >
-            <span id="spinner">...</span> Add
-        </button>
+      >
+        <span id="spinner">...</span> Add
+      </button>
     </li>
     {{end}}
-</ul>
-{{else}}
-<p>No Results Founds</p>
-{{end}}
+  </ul>
+  {{else}}
+  <p>No Results Founds</p>
+  {{end}}
 </div>
