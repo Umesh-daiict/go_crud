@@ -39,11 +39,13 @@ func SearchStocksResult(ticker string) []Stock {
 	return data.Results
 }
 
+// geting 1 month ago the vlaue
 func getDailyValue(ticker string) Values {
-	now_data := time.Now()
-	currentFormatedDate := now_data.Format("2024-05-15")
-	log.Printf(currentFormatedDate)
+	now_data := time.Now().AddDate(0, -1, -1)
+	currentFormatedDate := now_data.Format("2006-01-02")
+	log.Println("sda ->", currentFormatedDate)
 	resp, err := http.Get(PolygonPath + "/v1/open-close/" + strings.ToUpper(ticker) + "/" + currentFormatedDate + "?adjusted=true&apiKey=" + ApiKey)
+	log.Println(PolygonPath + "/v1/open-close/" + strings.ToUpper(ticker) + "/" + currentFormatedDate + "?adjusted=true&apiKey=" + ApiKey)
 	if err != nil {
 		log.Fatal(err)
 	}
