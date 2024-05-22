@@ -19,3 +19,6 @@
 [] atomic component
 [] ortogonal feture
 [] meta data driven approcj
+
+
+procet - https://devminer.xyz/projects
