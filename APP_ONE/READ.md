@@ -20,5 +20,10 @@
 [] ortogonal feture
 [] meta data driven approcj
 
+#tech
+[] db -> superbase, 
+[] analylist -> posthob
+[] hosting provvide -> gcp. aws
+
 
 procet - https://devminer.xyz/projects
