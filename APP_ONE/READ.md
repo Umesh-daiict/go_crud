@@ -25,5 +25,11 @@
 [] analylist -> posthob
 [] hosting provvide -> gcp. aws
 
+# data structure visualizer
 
 procet - https://devminer.xyz/projects
+
+
+# future todo 
+- add hindi and gujrati in go tour 
+- create a go quiz app
