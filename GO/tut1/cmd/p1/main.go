@@ -5,30 +5,29 @@ import (
 )
 
 func main() {
-	nums, k := []int{1, 2, 3, 4}, 5
-	maxOperations(nums, k)
+	nums, k := []int{1, 12, -5, -6, 50, 3}, 4
+	findMaxAverage(nums, k)
 }
 
-func maxOperations(nums []int, k int) int {
-	left, right, pair := 0, len(nums)-1, 0
-	cacheArr := make([]int, 0)
-	for left < right {
-		for left < right {
-			if left != right && ((nums[left] + nums[right]) == k) {
-				lCach := len(cacheArr) - 1
-				fmt.Println("l1l_", lCach, cacheArr, nums[left], nums[right])
+func findMaxAverage(nums []int, k int) float64 {
+	maxSum := sumOfk(nums, k, 0)
 
-				if lCach == -1 || (lCach >= 0 && cacheArr[lCach] != nums[left] && cacheArr[lCach] != nums[right]) {
-					pair++
-					cacheArr = append(cacheArr, nums[right])
-				}
-				// fmt.Println(cacheArr, lCach)
-
-			}
-			left++
+	for i := 1; i < len(nums)-k; i++ {
+		curSum := maxSum - float64(nums[i]) + float64(nums[i+k])
+		if curSum > maxSum {
+			maxSum = curSum
 		}
-		left = 0
-		right--
+		fmt.Println("cur", curSum, maxSum)
 	}
-	return pair
+	return maxSum / float64(k)
+}
+
+func sumOfk(nums []int, k int, start int) float64 {
+	sum, i := 0.0, start
+
+	for i < (start + k) {
+		sum += float64(nums[start])
+		i++
+	}
+	return sum
 }
