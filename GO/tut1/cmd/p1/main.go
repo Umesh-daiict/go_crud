@@ -1,33 +1,81 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"log"
+	"os"
 )
 
+type lnode struct {
+	line string
+	prev *lnode
+	next *lnode
+}
+
+type LinkList struct {
+	head *lnode
+	tail *lnode
+}
+
+func (ln *LinkList) insert(data string) {
+
+	newNode := &lnode{line: data}
+	if ln.head == nil {
+		ln.head = newNode
+		ln.tail = newNode
+	} else {
+		ln.tail.next = newNode
+		newNode.prev = ln.tail
+		ln.tail = newNode
+	}
+}
+func (ln *LinkList) dispay() {
+	cur := ln.head
+
+	for cur != nil {
+		fmt.Println(cur.line)
+		cur = cur.next
+	}
+}
+
+func (ln *LinkList) reverseDispay() {
+	cur := ln.tail
+
+	for cur != nil {
+		fmt.Println(cur.line)
+		cur = cur.prev
+	}
+}
 func main() {
-	nums, k := []int{1, 12, -5, -6, 50, 3}, 4
-	findMaxAverage(nums, k)
+	var ln LinkList
+	fileLines := readLines()
+	for _, line := range fileLines {
+		ln.insert(line)
+	}
+	ln.dispay()
+	fmt.Println("reverse data")
+	ln.reverseDispay()
+
 }
 
-func findMaxAverage(nums []int, k int) float64 {
-	maxSum := sumOfk(nums, k, 0)
+func readLines() []string {
+	lines := []string{}
 
-	for i := 1; i < len(nums)-k; i++ {
-		curSum := maxSum - float64(nums[i]) + float64(nums[i+k])
-		if curSum > maxSum {
-			maxSum = curSum
-		}
-		fmt.Println("cur", curSum, maxSum)
+	file, err := os.Open("../assets/data.txt")
+	if err != nil {
+		log.Fatal(err)
 	}
-	return maxSum / float64(k)
-}
+	defer file.Close()
 
-func sumOfk(nums []int, k int, start int) float64 {
-	sum, i := 0.0, start
-
-	for i < (start + k) {
-		sum += float64(nums[start])
-		i++
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
 	}
-	return sum
+
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	return lines
 }
