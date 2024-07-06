@@ -45,12 +45,32 @@ func (np *tnode) lUpdate(data string) *tnode {
 
 func (cur *tnode) printSubTree() {
 	if cur != nil {
-		fmt.Println("word:", cur.word, " count :", cur.count)
+		fmt.Printf(`|| word: %s count : %d ||`, cur.word, cur.count)
 	}
 	if cur.left != nil {
+		fmt.Printf("      \n / ")
+
 		cur.left.printSubTree()
 	}
 	if cur.right != nil {
+		fmt.Printf("\n       \\")
+		cur.right.printSubTree()
+	}
+
+}
+
+func (cur *tnode) printLevelTree() {
+	if cur != nil {
+		fmt.Printf(`|| word: %s count : %d ||`, cur.word, cur.count)
+	}
+
+	if cur.left != nil {
+		fmt.Printf("      \n / ")
+
+		cur.left.printSubTree()
+	}
+	if cur.right != nil {
+		fmt.Printf("\n       \\")
 		cur.right.printSubTree()
 	}
 
@@ -64,13 +84,41 @@ func (tr *Binarytree) insert(data string) {
 	tr.root = tr.root.lUpdate(data)
 }
 
+func (tr *Binarytree) printLevelTree() {
+	queue := []*tnode{}
+	ans := [][]string{}
+	// cur := tr.root
+	if tr.root != nil {
+		queue = append(queue, tr.root)
+	}
+
+	for len(queue) > 0 {
+		lq := len(queue)
+		level := []string{}
+		// fmt.Printf(`|| word: %s count : %d ||`, tr.root.word, tr.root.count)
+		for i := 0; i < lq; i++ {
+			if queue[i] != nil {
+				level = append(level, queue[i].word)
+				queue = append(queue, queue[i].left)
+				queue = append(queue, queue[i].right)
+			}
+		}
+		if len(level) > 0 {
+			ans = append(ans, level)
+		}
+		queue = queue[lq:]
+	}
+	fmt.Println("ans -->", ans)
+
+}
+
 func main() {
 	tr := &Binarytree{}
 	fileLines := readLines()
 	for _, line := range fileLines {
 		tr.insert(line)
 	}
-	tr.root.printSubTree()
+	tr.printLevelTree()
 
 }
 
