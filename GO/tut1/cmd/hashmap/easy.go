@@ -7,13 +7,38 @@ import (
 )
 
 func main() {
-	fmt.Println("Determine if Two Strings Are Close :", closeStrings("abc", "bca"), closeStrings("a", "aa"), closeStrings("cabbba", "abbccc"))
+	fmt.Println("Equal Row and Column Pairs")
+	fmt.Println("ans,,,,", equalPairs([][]int{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}}),
+		equalPairs([][]int{{3, 1, 2, 2}, {1, 4, 4, 5}, {2, 4, 2, 2}, {2, 4, 2, 2}}))
+
+	// fmt.Println("Determine if Two Strings Are Close :", closeStrings("abc", "bca"), closeStrings("a", "aa"), closeStrings("cabbba", "abbccc"))
 
 	// num1, num2 := []int{1, 2}, []int{1, 2, 2, 1, 1, 3}
 	// fmt.Println("das", uniqueOccurrences(num1), uniqueOccurrences(num2))
 
 	// num1, num2 := []int{1, 2, 3}, []int{2, 4, 6}
 	// fmt.Println("ans", findDifference(num1, num2))
+}
+
+func equalPairs(grid [][]int) int {
+	result := 0
+	colArr := [][]int{}
+	for i := 0; i < len(grid); i++ {
+		colCur := []int{}
+		for j := 0; j < len(grid); j++ {
+			colCur = append(colCur, grid[j][i])
+		}
+		colArr = append(colArr, colCur)
+	}
+
+	for _, row := range grid {
+		for _, col := range colArr {
+			if slices.Compare(row, col) == 0 {
+				result++
+			}
+		}
+	}
+	return result
 }
 
 func closeStrings(word1 string, word2 string) bool {
