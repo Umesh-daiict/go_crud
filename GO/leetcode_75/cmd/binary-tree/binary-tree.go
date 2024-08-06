@@ -112,15 +112,15 @@ func (tr *Binarytree) printLevelTree() {
 
 }
 
-func main() {
-	tr := &Binarytree{}
-	fileLines := readLines()
-	for _, line := range fileLines {
-		tr.insert(line)
-	}
-	tr.printLevelTree()
+// func main() {
+// 	tr := &Binarytree{}
+// 	fileLines := readLines()
+// 	for _, line := range fileLines {
+// 		tr.insert(line)
+// 	}
+// 	tr.printLevelTree()
 
-}
+// }
 
 func readLines() []string {
 	lines := []string{}
