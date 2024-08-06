@@ -26,7 +26,7 @@ func oddEvenList(head *ListNode) *ListNode {
 	odd.Next = dummy.Next
 	return head
 }
-func main2() {
+func main() {
 	head := &ListNode{Val: 1}
 	head.Next = &ListNode{Val: 2}
 	head.Next.Next = &ListNode{Val: 3}
